@@ -44,3 +44,38 @@ class CheckpointEveryNEpochs(Callback):
                 
 ```
 ### (ii) Create a Callback FUNCTION inside of PyTorch Lightning Trainer Module.
+```
+def training_epoch_end(self, outputs):
+        """
+        outputs is a python list containing the batch_dictionary from each batch
+        for the given epoch stacked up against each other. 
+        """
+        avg_loss = torch.stack([x['loss'] for x in outputs]).mean()
+        ##### using tensorboard logger
+        self.logger.experiment.add_scalar("Loss", avg_loss,self.current_epoch)
+        epoch_dict = {"loss": avg_loss}
+        
+        
+        # print(f"outputs: {outputs}")
+        # out_dict = outputs[1]
+        # save_dir = "/home/user/output/Painter/allPoses"
+        # Path(save_dir).mkdir(parents=True, exist_ok= True)
+        # pred_image = out_dict['pred_image']
+        # epoch = out_dict["epoch"]
+        # img_fpath = join(save_dir,"ep%03d.png" % epoch)
+        # # print(f"pred_image: {pred_image.shape}, epoch:{epoch}")
+        # # print(f"mask_fpath: {img_fpath}")
+        # pred_image = pred_image[0,:,:,:]
+        # save_image(pred_image, img_fpath)
+        # print(f"layer 0 weight: {torch.sum(self.painter_net.painter_net[0].weight)}")
+        # print(f"layer 0 grad: {torch.sum(self.painter_net.painter_net[0].weight.grad)}")
+
+        # print(f"layer 2 grad: {torch.sum(self.density_net.my_net[0].weight.grad)}")
+        # print(f"layer 4 grad: {torch.sum(self.density_net.my_net[0].weight.grad)}")
+        # print(f"layer 6 grad: {torch.sum(self.density_net.my_net[0].weight.grad)}")
+        # print(f"layer 8 grad: {torch.sum(self.density_net.my_net[0].weight.grad)}")
+
+        # print(f"layer 0 grad sum: {torch.sum(self.density_net.my_net[0].weight.grad)}")
+        
+        
+```
