@@ -76,6 +76,4 @@ def training_epoch_end(self, outputs):
         # print(f"layer 8 grad: {torch.sum(self.density_net.my_net[0].weight.grad)}")
 
         # print(f"layer 0 grad sum: {torch.sum(self.density_net.my_net[0].weight.grad)}")
-        
-        
 ```
