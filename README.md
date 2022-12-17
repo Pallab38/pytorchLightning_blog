@@ -4,7 +4,7 @@
 If we want to implement Callback, there's 2 ways: 
 ### (i) Create a Callback CLASS outside of PyTorch Lightning Trainer Module. 
 a) Simple
-```
+```Python
 class MyPrintingCallback(Callback):
     def on_train_start(self,trainer,pl_module):
         print("->>>>>>>  Training is starting   <<<<<<<-")
