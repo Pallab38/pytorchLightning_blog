@@ -13,7 +13,7 @@ class MyPrintingCallback(Callback):
 
 ```
 b) Save Checkpoint Every N Epochs
-```
+```Python
 ## https://github.com/Lightning-AI/lightning/issues/2534#issuecomment-674582085
 class CheckpointEveryNEpochs(Callback):
     """
@@ -44,7 +44,7 @@ class CheckpointEveryNEpochs(Callback):
                 
 ```
 ### (ii) Create a Callback FUNCTION inside of PyTorch Lightning Trainer Module.
-```
+```Python
 def training_epoch_end(self, outputs):
         """
         outputs is a python list containing the batch_dictionary from each batch
