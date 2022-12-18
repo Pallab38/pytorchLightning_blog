@@ -1,6 +1,6 @@
 # pytorchLightning_blog
 
-## CallBacks
+## CallBacks ```from pytorch_lightning.callbacks import Callback```
 If we want to implement Callback, there's 2 ways: 
 ### (i) Create a Callback CLASS outside of PyTorch Lightning Trainer Module. 
 a) Simple
@@ -10,7 +10,8 @@ a) Simple
     
     
 ```Python
-    
+
+from pytorch_lightning.callbacks import Callback
 class MyPrintingCallback(Callback):
     def on_train_start(self,trainer,pl_module):
         print("->>>>>>>  Training is starting   <<<<<<<-")
@@ -28,6 +29,8 @@ b) Save Checkpoint Every N Epochs
             
                         
 ```Python
+            
+from pytorch_lightning.callbacks import Callback
 ## https://github.com/Lightning-AI/lightning/issues/2534#issuecomment-674582085
 class CheckpointEveryNEpochs(Callback):
     """
@@ -102,3 +105,6 @@ def training_epoch_end(self, outputs):
 ```
 </p>            
 </details>
+            
+            
+
