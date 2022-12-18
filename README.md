@@ -108,7 +108,7 @@ def training_epoch_end(self, outputs):
             
 ## Optimizers
 ### Multiple Optimizers for multiple networks [Colab Example](https://colab.research.google.com/drive/1jVPI6as9gBCRxdu7r1Q6RvYu2Jh08OKJ?usp=sharing#scrollTo=jNqCMifazeDX)
-<details> <summary> Code </summary>
+<details> <summary> Code ([Github Issue Comment](https://github.com/Lightning-AI/lightning/issues/3346#issuecomment-760642139)   )</summary>
 <p>
             
  ```Python
