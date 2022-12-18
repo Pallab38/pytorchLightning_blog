@@ -106,5 +106,70 @@ def training_epoch_end(self, outputs):
 </p>            
 </details>
             
+## Optimizers
+### Multiple Optimizers for multiple networks
+<details> <summary> Code </summary>
+<p>
             
+ ```Python
+ import torch
+import torch.nn.functional as F
+from torch import nn
+from torch.utils.data import DataLoader, random_split
 
+import pytorch_lightning as pl
+
+from torchvision import transforms
+from torchvision.datasets.mnist import MNIST
+
+
+# This is just a wrapper so we can observe which optimizer
+# gets used in the update
+class CustomAdam(torch.optim.Adam):
+
+    def __init__(self, name, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.name = name
+
+    def step(self, *args, **kwargs):
+        print("updating", self.name)
+        return super().step(*args, **kwargs)
+
+
+class LitAutoEncoder(pl.LightningModule):
+
+    def __init__(self):
+        super().__init__()
+        self.encoder = nn.Sequential(
+            nn.Linear(28 * 28, 64),
+            nn.ReLU(),
+            nn.Linear(64, 3)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(3, 64),
+            nn.ReLU(),
+            nn.Linear(64, 28 * 28)
+        )
+
+    def training_step(self, batch, batch_idx, optimizer_idx):
+        print("skipping for batch_idx", batch_idx)
+        if optimizer_idx == 1:
+            x, y = batch
+            x = x.view(x.size(0), -1)
+            z = self.encoder(x)
+            x_hat = self.decoder(z)
+            loss = F.mse_loss(x_hat, x)
+            return loss
+
+    # one optimizer for encoder, one for decoder
+    def configure_optimizers(self):
+        optimizer0 = CustomAdam("encoder opt", self.encoder.parameters(), lr=1e-2)
+        optimizer1 = CustomAdam("decoder opt", self.decoder.parameters(), lr=1e-4)
+        return optimizer0, optimizer1
+
+    def optimizer_step(self, epoch, batch_idx, optimizer, optimizer_idx, *args, **kwargs):
+        if optimizer_idx == 1:
+            for opt in self.optimizers():
+                super().optimizer_step(epoch, batch_idx,  opt, optimizer_idx, *args, **kwargs)           
+ ```
+</p></details>
