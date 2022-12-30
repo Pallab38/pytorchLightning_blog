@@ -1,5 +1,28 @@
 # pytorchLightning_blog
 
+## Load Model From PyTorchLightning Class [PyTorchLightning ModelIO](https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.core.saving.ModelIO.html)
+
+Keep the **Directory Name** (`painterDensityTexture`) same as the directory name where you trained while Testing. Or throws following error: 
+```
+2022-12-30 17:39:15,496 - __main__  - ERROR - No module named 'painterDensityTexture' 
+Traceback (most recent call last):
+  File "interpolated_painterDensity/main_pl_texture.py", line 576, in <module>
+    LitPainterDensity.load_from_checkpoint(checkpoint_path=model_path)
+  File "/opt/miniconda3/lib/python3.8/site-packages/pytorch_lightning/core/saving.py", line 137, in load_from_checkpoint
+    return _load_from_checkpoint(
+  File "/opt/miniconda3/lib/python3.8/site-packages/pytorch_lightning/core/saving.py", line 184, in _load_from_checkpoint
+    checkpoint = pl_load(checkpoint_path, map_location=map_location)
+  File "/opt/miniconda3/lib/python3.8/site-packages/pytorch_lightning/utilities/cloud_io.py", line 47, in load
+    return torch.load(f, map_location=map_location)
+  File "/opt/miniconda3/lib/python3.8/site-packages/torch/serialization.py", line 712, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/opt/miniconda3/lib/python3.8/site-packages/torch/serialization.py", line 1049, in _load
+    result = unpickler.load()
+  File "/opt/miniconda3/lib/python3.8/site-packages/torch/serialization.py", line 1042, in find_class
+    return super().find_class(mod_name, name)
+ModuleNotFoundError: No module named 'painterDensityTexture'
+```
+
 ## CallBacks ```from pytorch_lightning.callbacks import Callback```
 If we want to implement Callback, there's 2 ways: 
 ### (i) Create a Callback CLASS outside of PyTorch Lightning Trainer Module. 
