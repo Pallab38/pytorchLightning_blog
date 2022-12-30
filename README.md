@@ -173,3 +173,15 @@ class LitAutoEncoder(pl.LightningModule):
                 super().optimizer_step(epoch, batch_idx,  opt, optimizer_idx, *args, **kwargs)           
  ```
 </p></details>
+
+### Acess Optimizer Details
+
+```
+optim = self.optimizers()
+optim_dict= optim.__dict__ ## ['defaults', '_zero_grad_profile_name', 'state', 'param_groups', '_warned_capturable_if_run_uncaptured', '_optimizer', '_strategy', '_optimizer_idx', '_on_before_step', '_on_after_step']        
+# optim_state = optim_dict["state"]  ## defaultdict(<class 'dict'>, {})
+optim_defaults = optim_dict['defaults'] ## ['lr', 'betas', 'eps', 'weight_decay', 'amsgrad', 'maximize', 'foreach', 'capturable']
+# print(f'defaults: {optim_defaults.keys(), optim_defaults}')
+lr = optim_defaults["lr"]
+
+```
