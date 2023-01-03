@@ -1,5 +1,12 @@
 # pytorchLightning_blog
+## Access the Directory where it automatically saves the Trained model
+```
+my_logDir = self.trainer.logger.log_dir
+## /home/user/thesis_canonical_painterDensity/Person_313/logs_313_SinglePose/Painterunet_init_run/version_75
+version_str = my_logDir.split("/")[-1] ## version_75
+version_num = version_str.split("_")[-1] ## 75
 
+```
 ## Load Model From PyTorchLightning Class [PyTorchLightning ModelIO](https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.core.saving.ModelIO.html)
 
 Keep the **Directory Name** (`painterDensityTexture`) same as the directory name where you trained while Testing. Or throws following error: 
