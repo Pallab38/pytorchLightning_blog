@@ -1,5 +1,6 @@
 # pytorchLightning_blog
-## Access the Directory where it automatically saves the Trained model
+## Access the Directory where it automatically saves the Trained model. 
+Can Be Accessed From PyTorchLightning Module i.e. `training_step`, `training_epoch_end`
 ```
 my_logDir = self.trainer.logger.log_dir
 ## /home/user/thesis_canonical_painterDensity/Person_313/logs_313_SinglePose/Painterunet_init_run/version_75
